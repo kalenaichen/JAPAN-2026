@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 日本青森東京 8日遊 (最終修正版)</title>
+    <title>2026 日本青森東京 8日遊 (修正完成版)</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -18,7 +18,7 @@
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            padding-bottom: 60px; /* 底部導覽列空間 */
+            padding-bottom: 60px;
         }
         
         /* 頂部 Header */
@@ -54,7 +54,7 @@
         }
         .tool-btn i { font-size: 1.2rem; margin-bottom: 4px; color: #3498db; }
 
-        /* 導覽列 (Days) - 注意: 這一區塊已確保按鈕標籤完整且無截斷問題 */
+        /* 導覽列 (Days) */
         .nav-scroller {
             overflow-x: auto;
             white-space: nowrap;
@@ -62,7 +62,7 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
             position: sticky;
-            top: 70px; /* Adjust based on header height */
+            top: 70px;
             z-index: 999;
             -webkit-overflow-scrolling: touch;
         }
@@ -138,4 +138,459 @@
             margin-top: 5px;
             margin-right: 8px; /* For multiple buttons */
         }
-        .action-btn i {
+        .action-btn i { margin-right: 4px; }
+
+        /* 費用表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f1f1f1; color: #333; }
+        .total-row { font-weight: bold; background-color: #fff3cd; }
+        .total-row td:nth-child(3) { color: var(--accent); } /* Highlight total number */
+
+        /* Hotel Tag */
+        .hotel-tag {
+            background: #e0f2f1;
+            color: #00695c;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>2026 日本青森東京之旅</h1>
+    <p>2/12 - 2/19 (8天7夜)</p>
+</header>
+
+<div class="tools-bar">
+    <a href="https://tenki.jp/forecast/2/5/3130/2206/" target="_blank" class="tool-btn">
+        <i class="fas fa-snowflake"></i> 青森天氣
+    </a>
+    <a href="https://tenki.jp/forecast/3/16/4410/13106/" target="_blank" class="tool-btn">
+        <i class="fas fa-sun"></i> 東京天氣
+    </a>
+    <a href="https://www.google.com/maps" target="_blank" class="tool-btn">
+        <i class="fas fa-map-marked-alt"></i> Google Maps
+    </a>
+    <a href="#budget" onclick="showSection('budget')" class="tool-btn">
+        <i class="fas fa-calculator"></i> 費用表
+    </a>
+</div>
+
+<div class="nav-scroller">
+    <button class="nav-btn active" onclick="showDay(1)">D1 2/12</button>
+    <button class="nav-btn" onclick="showDay(2)">D2 2/13</button>
+    <button class="nav-btn" onclick="showDay(3)">D3 2/14</button>
+    <button class="nav-btn" onclick="showDay(4)">D4 2/15</button>
+    <button class="nav-btn" onclick="showDay(5)">D5 2/16</button>
+    <button class="nav-btn" onclick="showDay(6)">D6 2/17</button>
+    <button class="nav-btn" onclick="showDay(7)">D7 2/18</button>
+    <button class="nav-btn" onclick="showDay(8)">D8 2/19</button>
+</div>
+
+<div class="container">
+
+    <div id="day1" class="day-section active">
+        <div class="timeline-item">
+            <div class="time">12:10 - 16:20</div>
+            <div class="card">
+                <h3>✈️ 航班：台北 - 東京成田</h3>
+                <p>獅子航空 SL 394</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">16:20 - 18:00</div>
+            <div class="card">
+                <h3>🚄 Skyliner 前往上野</h3>
+                <p>成田機場 -> 上野車站</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">18:00</div>
+            <div class="card">
+                <h3>🏨 飯店 Check-in (東京)</h3>
+                <span class="hotel-tag">東京上野喜來登福朋酒店</span>
+                <br>
+                <a href="https://www.marriott.com/en-us/hotels/tyofp-four-points-by-sheraton-tokyo-shinjuku/overview/" target="_blank" class="action-btn"><i class="fas fa-globe"></i> 官網</a>
+                <a href="https://www.google.com/maps/search/%E6%9D%B1%E4%BA%AC%E4%B8%8A%E9%87%8E%E5%96%9C%E4%BE%86%E7%99%BB%E7%A6%8F%E9%BB%9E%E9%85%92%E5%BA%97" target="_blank" class="action-btn"><i class="fas fa-location-arrow"></i> 導航</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="day2" class="day-section">
+        <div class="timeline-item">
+            <div class="time">07:38 - 10:52</div>
+            <div class="card">
+                <h3>🚄 新幹線：上野 -> 新青森</h3>
+                <p>Hayabusa 3號 (JR PASS)</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">11:30 - 17:00</div>
+            <div class="card">
+                <h3>📸 弘前市區觀光</h3>
+                <p>弘前車站 (¥680) -> 1. 津輕藩睡魔村 / 2. 仲町武家宅邸 / 3. 弘前城 (雪燈籠) / 4. 大正浪漫喫茶 (下午茶)</p>
+                <a href="https://www.google.com/maps/search/%E5%BC%98%E5%89%8D%E5%9F%8E" target="_blank" class="action-btn"><i class="fas fa-map-pin"></i> 弘前城導航</a>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">住宿</div>
+            <div class="card">
+                <h3>東橫INN 新青森站東口 (本日起連續入住)</h3>
+                <span class="hotel-tag">東橫INN 新青森站東口</span>
+                <br>
+                <a href="https://www.toyoko-inn.com/search/detail/00318" target="_blank" class="action-btn"><i class="fas fa-globe"></i> 官網</a>
+                <a href="https://www.google.com/maps/search/%E6%9D%B1%E6%A9%ABINN%E6%96%B0%E9%9D%92%E6%A3%AE%E7%AB%99%E6%9D%B1%E5%8F%A3" target="_blank" class="action-btn"><i class="fas fa-location-arrow"></i> 導航</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="day3" class="day-section">
+        <div class="timeline-item">
+            <div class="time">09:40 - 10:45</div>
+            <div class="card">
+                <h3>🚌 JR BUS はっこうだ 4號</h3>
+                <p>新青森駅前 -> 纜車駅前 (JR PASS 免費免預約)</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">11:00 - 13:00</div>
+            <div class="card">
+                <h3>❄️ 八甲田纜車及樹冰</h3>
+                <p>搭乘纜車欣賞樹冰奇景</p>
+                <a href="https://www.google.com/maps/search/%E5%85%AB%E7%94%B2%E7%94%B0%E3%83%AD%E3%83%BC%E3%83%97%E3%82%A6%E3%82%A7%E3%82%A4" target="_blank" class="action-btn"><i class="fas fa-mountain"></i> 纜車站導航</a>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">13:43 - 14:38</div>
+            <div class="card">
+                <h3>🚌 JR BUS：返回青森車站</h3>
+                <p>纜車駅前 -> 青森駅</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">15:00 - 19:00</div>
+            <div class="card">
+                <h3>🐟 青森市區觀光與美食</h3>
+                <p>
+                    1. 古川市場 (海鮮丼) - <a href="https://www.google.com/maps/search/%E5%8F%A4%E5%B7%9D%E5%B8%82%E5%A0%B4%28%E6%B5%B7%E9%AE%AE%E4%B8%BC%29" target="_blank">導航</a><br>
+                    2. A-FACTORY (蘋果酒工廠) - <a href="https://www.google.com/maps/search/A-FACTORY+%E9%9D%92%E6%A3%AE" target="_blank">導航</a><br>
+                    3. 青森物產館 (ASPM) - <a href="https://www.google.com/maps/search/%E9%9D%92%E6%A3%AE%E7%89%A9%E7%94%A3%E9%A4%A8" target="_blank">導航</a><br>
+                    4. 善知鳥神社「腰腿守護御守」 - <a href="https://www.google.com/maps/search/%E5%96%84%E7%9F%A5%E9%B3%A5%E7%A5%9E%E7%A4%BE" target="_blank">導航</a><br>
+                    5. お食事処おさない (炸干貝料理) - <a href="https://www.google.com/maps/search/%E3%81%8A%E9%A3%9F%E4%BA%8B%E5%87%A6%E3%81%8A%E3%81%95%E3%81%AA%E3%81%84" target="_blank">導航</a>
+                </p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">住宿</div>
+            <div class="card">
+                <span class="hotel-tag">東橫INN 新青森站東口</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="day4" class="day-section">
+        <div class="timeline-item">
+            <div class="time">09:53 - 10:16</div>
+            <div class="card">
+                <h3>🚄 新幹線：新青森 -> 八戶</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">10:20 - 13:30</div>
+            <div class="card">
+                <h3>🦀 八食中心 & 購物</h3>
+                <p>八食中心買海鮮+七厘村燒烤 (午餐)<br>八戶駅前 YOU TREE 購物</p>
+                <a href="https://www.google.com/maps/search/%E5%85%AB%E9%A3%9F%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E4%B8%83%E5%8E%98%E6%9D%91" target="_blank" class="action-btn"><i class="fas fa-fire"></i> 七厘村導航</a>
+                <a href="https://www.google.com/maps/search/%E5%85%AB%E6%88%B6%E9%A7%85+YOU+TREE" target="_blank" class="action-btn"><i class="fas fa-shopping-bag"></i> YOU TREE</a>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">13:50 - 15:30</div>
+            <div class="card">
+                <h3>🚌 接駁車：八戶 -> 奧入瀨星野</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">16:00</div>
+            <div class="card">
+                <h3>🏨 CHECK IN & 晚餐</h3>
+                <span class="hotel-tag">星野奧入瀨溪流飯店</span>
+                <p>18:20 晚餐預約完成</p>
+                <a href="https://hoshinoresorts.com/zh_tw/hotels/oirasekeiryu/" target="_blank" class="action-btn"><i class="fas fa-globe"></i> 官網</a>
+                <a href="https://www.google.com/maps/search/%E6%98%9F%E9%87%8E%E9%9B%86%E5%9C%98%E5%A5%A7%E5%85%A5%E7%80%A8%E6%BA%AA%E6%B5%81%E9%A3%AF%E5%BA%97" target="_blank" class="action-btn"><i class="fas fa-bed"></i> 導航</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="day5" class="day-section">
+        <div class="timeline-item">
+            <div class="time">08:00 - 10:00</div>
+            <div class="card">
+                <h3>🍽️ 奧入瀨早餐 (已預約)</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">10:00 - 11:00</div>
+            <div class="card">
+                <h3>🌲 奧入瀨設施享受/溪流散步</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">11:10 - 12:10</div>
+            <div class="card">
+                <h3>🚌 奧入瀨溪流飯店巴士活動 (已預約)</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">12:10 - 15:00</div>
+            <div class="card">
+                <h3>🚶‍♀️ 奧入瀨溪流自由散步</h3>
+                <p>利用剩餘時間深入感受溪流美景</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">15:30 - 16:30</div>
+            <div class="card">
+                <h3>🚌 接駁車：奧入瀨 -> 青森屋</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">18:00</div>
+            <div class="card">
+                <h3>🏨 CHECK IN & 晚餐</h3>
+                <span class="hotel-tag">星野青森屋</span>
+                <p>晚上：睡魔雪燈籠、浮湯溫泉</p>
+                <a href="https://hoshinoresorts.com/zh_tw/hotels/aomoriya/" target="_blank" class="action-btn"><i class="fas fa-globe"></i> 官網</a>
+                <a href="https://www.google.com/maps/search/%E6%98%9F%E9%87%8E%E9%9B%86%E5%9C%98%E9%9D%92%E6%A3%AE%E5%B1%8B" target="_blank" class="action-btn"><i class="fas fa-hot-tub"></i> 導航</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="day6" class="day-section">
+        <div class="timeline-item">
+            <div class="time">08:00 - 10:00</div>
+            <div class="card">
+                <h3>🍽️ 青森屋早餐 (已預約)</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">10:30 - 11:30</div>
+            <div class="card">
+                <h3>🌳 青森屋公園散步/設施享受</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">11:25</div>
+            <div class="card">
+                <h3>🚌 接駁車：前往三澤站</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">12:10 - 14:58</div>
+            <div class="card">
+                <h3>🚄 新幹線：八戶 -> 上野</h3>
+                <p>Hayabusa 18號 (午餐自理)</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">15:00 - 22:00</div>
+            <div class="card">
+                <h3>🛍️ 上野購物</h3>
+                <p>多慶屋及上野周邊購物</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">住宿</div>
+            <div class="card">
+                <span class="hotel-tag">上野御徒町曼迪高級酒店 (本日起連續入住)</span>
+                <br>
+                <a href="https://hotel-monday.com/premium/ueno/" target="_blank" class="action-btn"><i class="fas fa-globe"></i> 官網</a>
+                <a href="https://www.google.com/maps/search/%E4%B8%8A%E9%87%8E%E5%BE%A1%E5%BE%92%E7%94%BA%E6%9B%BC%E8%BF%AA%E9%AB%98%E7%B4%9A%E9%85%92%E5%BA%97" target="_blank" class="action-btn"><i class="fas fa-location-arrow"></i> 導航</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="day7" class="day-section">
+        <div class="timeline-item">
+            <div class="time">全日</div>
+            <div class="card">
+                <h3>🛒 多慶屋購物及東京市區自由行</h3>
+                <p>建議行程：<br>- 補充採購<br>- 市區逛街</p>
+                <a href="https://www.google.com/maps/search/%E5%A4%9A%E6%85%B6%E5%B1%8B" target="_blank" class="action-btn"><i class="fas fa-shopping-basket"></i> 多慶屋導航</a>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">晚餐</div>
+            <div class="card">
+                <h3>🍣 東京車站壽司</h3>
+                <p>東京站排隊壽司名店</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">住宿</div>
+            <div class="card">
+                <span class="hotel-tag">上野御徒町曼迪高級酒店</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="day8" class="day-section">
+        <div class="timeline-item">
+            <div class="time">09:00 - 11:00</div>
+            <div class="card">
+                <h3>🏮 淺草寺參拜</h3>
+                <p>最後巡禮</p>
+                <a href="https://www.google.com/maps/search/%E6%B7%BA%E8%8D%89%E5%AF%BA" target="_blank" class="action-btn"><i class="fas fa-place-of-worship"></i> 淺草寺</a>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">14:30</div>
+            <div class="card">
+                <h3>🚄 前往成田機場</h3>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">17:20 - 20:25</div>
+            <div class="card">
+                <h3>✈️ 航班：東京成田 - 台北</h3>
+                <p>獅子航空 SL 395</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="budget" class="day-section">
+        <div class="card">
+            <h3>💰 費用預算 (每人概算)</h3>
+            <p style="color:red; font-size:0.8rem;">*費用不含日幣公費部分，日幣總額請依實際匯率換算加入台幣總計。</p>
+            <table>
+                <tr>
+                    <th>項目</th>
+                    <th>說明</th>
+                    <th>費用 (TWD)</th>
+                </tr>
+                <tr>
+                    <td>機票</td>
+                    <td>來回機票 (獅子航空)</td>
+                    <td data-twd="12631">12,631</td>
+                </tr>
+                <tr>
+                    <td>交通</td>
+                    <td>JR PASS 5日卷</td>
+                    <td data-twd="5578">5,578</td>
+                </tr>
+                 <tr>
+                    <td>D1 住宿</td>
+                    <td>福朋喜來登 (1晚)</td>
+                    <td data-twd="1444">1,444</td>
+                </tr>
+                <tr>
+                    <td>D2/D3 住宿</td>
+                    <td>東橫INN 新青森 (2晚)</td>
+                    <td data-twd="3569">3,569</td> 
+                </tr>
+                <tr>
+                    <td>D4 住宿</td>
+                    <td>星野奧入瀨 (1晚)</td>
+                    <td data-twd="5299">5,299</td>
+                </tr>
+                <tr>
+                    <td>D5 住宿</td>
+                    <td>星野青森屋 (1晚)</td>
+                    <td data-twd="3824">3,824</td>
+                </tr>
+                <tr>
+                    <td>D6/D7 住宿</td>
+                    <td>Monday Premium (2晚)</td>
+                    <td data-twd="4871">4,871</td>
+                </tr>
+                <tr class="total-row">
+                    <td>台幣總計</td>
+                    <td>(機票+交通+住宿)</td>
+                    <td id="twd-total"></td>
+                </tr>
+                <tr style="background:#f9f9f9;">
+                    <td>公費 (日幣)</td>
+                    <td>餐飲/雜支等</td>
+                    <td>¥24,000</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 費用自動加總計算
+    function calculateTotal() {
+        let total = 0;
+        const twdCosts = document.querySelectorAll('td[data-twd]');
+        twdCosts.forEach(td => {
+            total += parseInt(td.getAttribute('data-twd'));
+        });
+        document.getElementById('twd-total').textContent = total.toLocaleString('en-US');
+    }
+
+    // 天數切換功能
+    function showDay(dayIndex) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.day-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+        
+        // Show selected
+        const selected = document.getElementById('day' + dayIndex);
+        if(selected) selected.classList.add('active');
+
+        // Update nav buttons
+        const btns = document.querySelectorAll('.nav-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+        // The day index is 1-based, array is 0-based
+        if (dayIndex > 0 && dayIndex <= btns.length) {
+            btns[dayIndex-1].classList.add('active');
+        }
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // 費用表切換功能
+    function showSection(id) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.day-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+        
+        // Show selected section
+        document.getElementById(id).classList.add('active');
+        
+        // Remove active state from day buttons
+        const btns = document.querySelectorAll('.nav-btn');
+        btns.forEach(btn => btn.classList.remove('active'));
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // 初始載入時執行
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateTotal(); // 計算總額
+        showDay(1); // 預設顯示 Day 1
+    });
+
+</script>
+
+</body>
+</html>
